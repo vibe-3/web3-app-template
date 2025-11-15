@@ -1,0 +1,24 @@
+{
+  "mcpServers": {
+    "base-mcp": {
+      "command": "base-mcp",
+      "args": [],
+      "env": {
+        "COINBASE_API_KEY_NAME": "9891a37c-cd07-42b1-934d-ae4534447be8",
+        "COINBASE_API_PRIVATE_KEY": "RQNHJM+9m11f2lg6KWcTJlHl+aKOYYgHMxD2wphtesl3/owr1EU9KVBlg4LIYuQh7sdLG1XMC06TXFO+L3oZHA==",
+        "SEED_PHRASE": "lumber gallery unfold region cloth host dolphin balcony bring pencil exotic man",
+        "COINBASE_PROJECT_ID": "de2e6e65-9fc2-4ec6-9933-e5d524e308f1",
+        "ALCHEMY_API_KEY": "your_alchemy_api_key",
+        "PINATA_JWT": "your_pinata_jwt",
+        "OPENROUTER_API_KEY": "your_openrouter_api_key",
+        "CHAIN_ID": "84532"
+      },
+      "disabled": false,
+      "autoApprove": []
+    },
+    "openzeppelin-contracts": {
+      "type": "http",
+      "url": "https://mcp.openzeppelin.com/contracts/solidity/mcp"
+    }
+  }
+}
