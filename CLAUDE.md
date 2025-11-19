@@ -51,3 +51,53 @@ Use the `cn()` utility from `@/lib/utils` for conditional class merging.
 ### Path Aliases
 
 TypeScript configured with `@/*` mapping to `./src/*` for clean imports.
+
+## Critical: Preventing Hydration Errors
+
+**⚠️ IMPORTANT: When working with Web3 components, you MUST prevent hydration mismatches.**
+
+### The Problem
+Next.js performs SSR even for `'use client'` components. Wagmi hooks (`useAccount`, `useBalance`, etc.) have different values during SSR vs client hydration, causing React hydration errors.
+
+### Required Pattern
+**ANY component that uses wagmi hooks or renders conditionally based on wallet state MUST use this pattern:**
+
+```tsx
+'use client';
+
+import { useState, useEffect } from 'react';
+import { useAccount } from 'wagmi';
+
+export default function MyComponent() {
+  const [mounted, setMounted] = useState(false);
+  const { address, isConnected } = useAccount();
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Prevent hydration mismatch - render static content until mounted
+  if (!mounted) {
+    return <div>Loading...</div>;
+  }
+
+  // Now safe to render based on wallet state
+  if (!isConnected) {
+    return <div>Please connect wallet</div>;
+  }
+
+  return <div>Connected: {address}</div>;
+}
+```
+
+### Rules
+1. **Never conditionally render** based on `isConnected`, `address`, or any wagmi hook data without a mounted check first
+2. **Always add mounted state** to any component using `useAccount`, `useBalance`, `useContractRead`, etc.
+3. **The initial return** (when `!mounted`) should render a simple, static loading state
+4. **After mounted**, you can safely render dynamic Web3 content
+
+### Why This Works
+- Server renders the static loading state
+- Client also renders the static loading state on first pass (hydration matches!)
+- After `useEffect` runs (client-only), `mounted` becomes `true` and dynamic content appears
+- No hydration mismatch because server and client HTML are identical initially
