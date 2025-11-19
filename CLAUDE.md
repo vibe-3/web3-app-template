@@ -44,10 +44,7 @@ Default setup uses Base Sepolia testnet with injected connector (MetaMask, etc.)
 
 ### shadcn/ui Component Usage
 
-Components are installed from the shadcn/ui registry. Use standard pattern:
-```bash
-npx shadcn@latest add [component-name]
-```
+Components are installed from the shadcn/ui registry. 
 
 Use the `cn()` utility from `@/lib/utils` for conditional class merging.
 
