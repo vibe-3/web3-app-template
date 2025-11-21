@@ -30,7 +30,6 @@ The app wraps all content in `Web3Provider` (src/components/providers/web3-provi
 ### Key Directories
 
 - `src/config/wagmi.ts` - Wagmi configuration (chains, connectors, transports)
-- `src/components/web3/` - Web3-specific components (ConnectWallet, AccountDisplay)
 - `src/components/ui/` - shadcn/ui primitives (installed via `npx shadcn@latest add`)
 - `src/lib/utils.ts` - Utility functions including `cn()` for className merging
 - `src/hooks/` - Custom React hooks
